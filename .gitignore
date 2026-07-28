@@ -1,0 +1,13 @@
+# Environment
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environment
+pgaivoa/
+venv/
+.venv/
