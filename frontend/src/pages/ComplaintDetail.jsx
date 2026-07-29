@@ -10,11 +10,7 @@ import LoadingSpinner from '../components/Common/LoadingSpinner';
 import Badge from '../components/Common/Badge';
 import { ArrowLeft, Wand2, FileText } from 'lucide-react';
 
-/**
- * Complaint Detail page – shows existing complaint with edit capability.
- * Same layout as LogComplaint but in 'edit' mode.
- * The AI edit tool can modify specific fields via natural language.
- */
+
 export default function ComplaintDetail() {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -23,14 +19,14 @@ export default function ComplaintDetail() {
   const { items, loading, currentComplaint } = useSelector(s => s.complaints);
 
   useEffect(() => {
-    // If items not loaded yet, fetch them
+    
     if (items.length === 0) {
       dispatch(fetchComplaints());
     }
   }, [dispatch, items.length]);
 
   useEffect(() => {
-    // Once items are loaded, find the one matching the URL id
+    
     const found = items.find(c => c.id === parseInt(id));
     if (found) {
       dispatch(setCurrentComplaint(found));
