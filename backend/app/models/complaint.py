@@ -1,4 +1,4 @@
-# backend/app/models/complaint.py
+
 from sqlalchemy import Column, Integer, String, Text, DateTime, Boolean, Enum
 from sqlalchemy.sql import func
 from app.database import Base
@@ -29,25 +29,25 @@ class Complaint(Base):
     id = Column(Integer, primary_key=True, index=True)
     complaint_number = Column(String(50), unique=True, index=True)
     
-    # Complainant Info
+    
     complainant_name = Column(String(200))
     complainant_company = Column(String(200))
     complainant_email = Column(String(200))
     complainant_phone = Column(String(50))
     
-    # Product Info
+    
     product_name = Column(String(200))
     batch_number = Column(String(100))
     manufacturing_date = Column(String(50))
     expiry_date = Column(String(50))
     quantity_affected = Column(String(100))
     
-    # Complaint Details
+    
     date_received = Column(String(50))
     category = Column(String(100))
     description = Column(Text)
     
-    # AI-Generated Fields
+    
     severity = Column(String(50))
     risk_score = Column(Integer, default=0)
     ai_summary = Column(Text)
@@ -55,14 +55,14 @@ class Complaint(Base):
     capa_recommendation = Column(Text)
     regulatory_reportable = Column(Boolean, default=False)
     
-    # Assignment
+    
     assigned_to = Column(String(200))
     status = Column(String(50), default="Open")
+
+
+    source = Column(String(50), default="Manual") 
     
-    # Source
-    source = Column(String(50), default="Manual")  # Manual, Email, Document, AI-Prompt
     
-    # Timestamps
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
 
