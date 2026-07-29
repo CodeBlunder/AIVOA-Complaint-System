@@ -1,4 +1,4 @@
-// src/components/AITools/DocumentUpload.jsx
+
 import React, { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useDispatch } from 'react-redux';
