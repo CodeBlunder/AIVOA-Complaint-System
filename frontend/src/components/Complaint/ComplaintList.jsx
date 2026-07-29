@@ -5,9 +5,7 @@ import ComplaintCard from './ComplaintCard';
 import LoadingSpinner from '../Common/LoadingSpinner';
 import { Search, Filter, SlidersHorizontal } from 'lucide-react';
 
-/**
- * Renders the grid of complaint cards with search and filter controls.
- */
+
 export default function ComplaintList() {
   const dispatch = useDispatch();
   const { items, loading } = useSelector(s => s.complaints);
@@ -16,12 +14,12 @@ export default function ComplaintList() {
   const [filterSeverity, setFilterSeverity] = useState('');
   const [filterStatus, setFilterStatus] = useState('');
 
-  // Fetch all complaints on mount
+
   useEffect(() => {
     dispatch(fetchComplaints());
   }, [dispatch]);
 
-  // Client-side filtering
+
   const filtered = items.filter(c => {
     const matchSearch =
       !search ||
