@@ -1,4 +1,4 @@
-# backend/app/agents/nodes/extract_node.py
+
 import json
 from langchain_groq import ChatGroq
 from langchain_core.prompts import ChatPromptTemplate
