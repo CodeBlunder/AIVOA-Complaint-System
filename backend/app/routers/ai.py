@@ -6,7 +6,7 @@ from app.services.document_parser import extract_text_from_file
 
 router = APIRouter(prefix="/ai", tags=["ai"])
 
-# ── Request body models (fixes the query-param URL bug) ─────────────────────
+
 
 class LogComplaintRequest(BaseModel):
     prompt: str
@@ -16,7 +16,7 @@ class EditComplaintRequest(BaseModel):
     edit_instruction: str
     current_data: dict
 
-# ── Endpoints ────────────────────────────────────────────────────────────────
+
 
 @router.post("/log-complaint")
 async def ai_log_complaint(request: LogComplaintRequest):
