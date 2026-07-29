@@ -1,4 +1,4 @@
-# backend/app/routers/complaints.py
+
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
@@ -25,7 +25,7 @@ def create_complaint(complaint: ComplaintCreate, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(db_complaint)
     
-    # Audit log
+    
     log = AuditLog(complaint_id=db_complaint.id, action="created",
                    changed_by="system", change_details="Complaint created")
     db.add(log)
