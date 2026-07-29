@@ -1,4 +1,4 @@
-# backend/app/agents/nodes/log_node.py
+
 import json
 from langchain_groq import ChatGroq
 from langchain_core.prompts import ChatPromptTemplate
@@ -8,7 +8,7 @@ from app.agents.state import AgentState
 llm = ChatGroq(
     api_key=settings.GROQ_API_KEY,
     model="llama-3.3-70b-versatile",
-    temperature=0.1,  # Low temp for structured extraction
+    temperature=0.1, 
 )
 
 LOG_PROMPT = """You are a pharmaceutical QMS expert. A user has described a customer complaint.
@@ -42,9 +42,9 @@ async def log_complaint_node(state: AgentState) -> AgentState:
     response = chain.invoke({"user_input": state["user_input"]})
     
     try:
-        # Parse the LLM JSON response
+        
         content = response.content.strip()
-        # Remove markdown code blocks if present
+        
         if content.startswith("```"):
             content = content.split("```")[1]
             if content.startswith("json"):
