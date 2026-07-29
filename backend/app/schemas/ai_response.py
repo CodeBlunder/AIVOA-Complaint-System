@@ -1,4 +1,4 @@
-# backend/app/schemas/ai_response.py
+
 from pydantic import BaseModel
 from typing import Optional, List
 
@@ -20,8 +20,8 @@ class ExtractedComplaintData(BaseModel):
 
 class RiskAssessment(BaseModel):
     severity: str
-    risk_score: int                     # 1-100
-    risk_level: str                     # Critical / Major / Minor
+    risk_score: int                    
+    risk_level: str                     
     regulatory_reportable: bool
     ai_summary: str
     root_cause_suggestion: str
