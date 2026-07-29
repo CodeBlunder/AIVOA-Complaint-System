@@ -5,7 +5,7 @@ export const runLogAgent = createAsyncThunk(
   'ai/logComplaint',
   async (prompt, { rejectWithValue }) => {
     try {
-      // POST with JSON body — NOT query param — avoids URL length/encoding issues
+      
       const response = await api.post('/ai/log-complaint', { prompt });
       return response.data;
     } catch (err) {
