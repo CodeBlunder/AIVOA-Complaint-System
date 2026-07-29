@@ -1,4 +1,4 @@
-// src/components/AITools/RiskAssessment.jsx
+
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { AlertTriangle, CheckCircle, ShieldAlert, FileText } from 'lucide-react';
