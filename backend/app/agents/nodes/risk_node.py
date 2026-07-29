@@ -1,4 +1,4 @@
-# backend/app/agents/nodes/risk_node.py
+
 import json
 from langchain_groq import ChatGroq
 from langchain_core.prompts import ChatPromptTemplate
@@ -57,7 +57,7 @@ async def risk_assessment_node(state: AgentState) -> AgentState:
         risk_data = json.loads(content)
         state["risk_assessment"] = risk_data
         
-        # Merge risk data back into form_data
+        
         if state.get("form_data"):
             state["form_data"]["severity"] = risk_data.get("severity")
             state["form_data"]["risk_score"] = risk_data.get("risk_score")
