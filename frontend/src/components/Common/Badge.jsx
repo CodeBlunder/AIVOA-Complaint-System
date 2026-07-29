@@ -2,13 +2,7 @@ import React from 'react';
 import { getSeverityClasses, getStatusClasses } from '../../utils/helpers';
 import { clsx } from 'clsx';
 
-/**
- * Badge component for Severity (Critical/Major/Minor) and Status labels.
- * Usage:
- *   <Badge type="severity" value="Critical" />
- *   <Badge type="status" value="Open" />
- *   <Badge type="category" value="Quality" />
- */
+
 export default function Badge({ type = 'severity', value, className = '' }) {
   if (!value) return null;
 
