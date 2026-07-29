@@ -1,4 +1,4 @@
-# backend/app/agents/nodes/edit_node.py
+
 import json
 from langchain_groq import ChatGroq
 from langchain_core.prompts import ChatPromptTemplate
@@ -51,7 +51,7 @@ async def edit_complaint_node(state: AgentState) -> AgentState:
         edit_fields = json.loads(content)
         state["edit_instructions"] = edit_fields
         
-        # Merge changes into form_data
+        
         merged = {**state.get("current_complaint_data", {}), **edit_fields}
         state["form_data"] = merged
     except json.JSONDecodeError as e:
