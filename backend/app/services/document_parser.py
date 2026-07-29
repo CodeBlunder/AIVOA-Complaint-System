@@ -1,5 +1,5 @@
-# backend/app/services/document_parser.py
-import pypdf          # replaces fitz/PyMuPDF — pure Python, no C libs needed
+
+import pypdf          
 import docx
 import io
 from PIL import Image
