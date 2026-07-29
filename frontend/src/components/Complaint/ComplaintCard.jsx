@@ -4,10 +4,7 @@ import { formatDate, truncate, timeAgo } from '../../utils/helpers';
 import Badge from '../Common/Badge';
 import { ArrowRight, Package, Calendar, User } from 'lucide-react';
 
-/**
- * Single complaint summary card used in the list view.
- * Clicking it navigates to the detail/edit page.
- */
+
 export default function ComplaintCard({ complaint }) {
   const navigate = useNavigate();
 
