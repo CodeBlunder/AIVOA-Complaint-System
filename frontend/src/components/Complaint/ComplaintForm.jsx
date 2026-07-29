@@ -9,14 +9,14 @@ import {
 import toast from 'react-hot-toast';
 import { Save, RotateCcw, Database } from 'lucide-react';
 
-// ── Dropdown options ────────────────────────────────────────────────────────
+
 const SOURCES     = ['Email', 'Phone Call', 'Customer Portal', 'Field Rep', 'Regulatory Body', 'Other'];
 const TYPES       = ['Quality Defect', 'Packaging Issue', 'Efficacy Concern', 'Safety/ADR', 'Labeling Error', 'Contamination', 'Other'];
 const SEVERITIES  = ['Critical', 'Major', 'Minor'];
 const PRIORITIES  = ['Urgent', 'High', 'Medium', 'Low'];
 const STATUSES    = ['Open', 'Under Investigation', 'Pending CAPA', 'Closed'];
 
-// ── Status badge colour map ─────────────────────────────────────────────────
+
 const STATUS_BADGE = {
   Open:                 'bg-yellow-100 text-yellow-700 border-yellow-300',
   'Under Investigation':'bg-blue-100 text-blue-700 border-blue-300',
@@ -24,7 +24,7 @@ const STATUS_BADGE = {
   Closed:               'bg-green-100 text-green-700 border-green-300',
 };
 
-// ── Section header ──────────────────────────────────────────────────────────
+
 function SectionHeader({ number, title }) {
   return (
     <div className="flex items-center gap-2 mb-4">
@@ -35,7 +35,7 @@ function SectionHeader({ number, title }) {
   );
 }
 
-// ── Single field ────────────────────────────────────────────────────────────
+
 function Field({ label, field, type = 'text', options = null, form, onChange, unit = null, required = false }) {
   const placeholder = 'Awaiting AI extraction...';
   const base = `w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm
@@ -67,7 +67,7 @@ function Field({ label, field, type = 'text', options = null, form, onChange, un
           className={`${base} resize-none text-gray-800`}
         />
       ) : unit ? (
-        // Field with unit suffix (e.g. kg)
+        
         <div className="flex items-center border border-gray-200 rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-indigo-400">
           <input
             type={type}
@@ -93,7 +93,6 @@ function Field({ label, field, type = 'text', options = null, form, onChange, un
   );
 }
 
-// ── Main component ──────────────────────────────────────────────────────────
 export default function ComplaintForm({ isEdit = false }) {
   const dispatch = useDispatch();
   const form     = useSelector(s => s.complaints.currentComplaint) || {};
@@ -123,11 +122,11 @@ export default function ComplaintForm({ isEdit = false }) {
     }
   };
 
-  // Resolve status badge
+  
   const currentStatus = form.status || 'Open';
   const badgeClass    = STATUS_BADGE[currentStatus] || STATUS_BADGE['Open'];
 
-  const fp = { form, onChange: handleChange }; // shorthand props
+  const fp = { form, onChange: handleChange };
 
   return (
     <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
