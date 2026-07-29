@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Bell, Search, Wifi } from 'lucide-react';
 
-// Maps route paths to human-readable page titles
+
 const PAGE_TITLES = {
   '/dashboard':      { title: 'Dashboard', sub: 'Overview of complaint activity' },
   '/complaints/new': { title: 'Log Complaint', sub: 'AI-assisted complaint entry' },
@@ -15,13 +15,13 @@ export default function Header() {
   const navigate = useNavigate();
   const complaints = useSelector(s => s.complaints.items);
 
-  // Resolve page title – fallback for /complaints/:id routes
+
   const pageInfo = PAGE_TITLES[location.pathname] || {
     title: 'Complaint Detail',
     sub: 'View and edit complaint record',
   };
 
-  // Count open complaints for the badge
+
   const openCount = complaints.filter(c => c.status === 'Open').length;
 
   return (
