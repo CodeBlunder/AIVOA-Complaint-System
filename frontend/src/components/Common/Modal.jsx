@@ -1,13 +1,7 @@
 import React, { useEffect } from 'react';
 import { X } from 'lucide-react';
 
-/**
- * Generic modal overlay.
- * Usage:
- *   <Modal isOpen={true} onClose={() => setOpen(false)} title="Confirm Delete">
- *     <p>Are you sure?</p>
- *   </Modal>
- */
+
 export default function Modal({ isOpen, onClose, title, children, size = 'md' }) {
   // Close on Escape key
   useEffect(() => {
