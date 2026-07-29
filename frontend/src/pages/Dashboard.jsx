@@ -10,9 +10,6 @@ import {
   Clock, TrendingUp, FilePlus, ArrowRight
 } from 'lucide-react';
 
-/**
- * Dashboard page – shows KPI cards and a recent complaints preview.
- */
 export default function Dashboard() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -22,7 +19,7 @@ export default function Dashboard() {
     dispatch(fetchComplaints());
   }, [dispatch]);
 
-  // Compute KPIs
+  
   const total      = items.length;
   const open       = items.filter(c => c.status === 'Open').length;
   const critical   = items.filter(c => c.severity === 'Critical').length;
