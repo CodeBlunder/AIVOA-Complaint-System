@@ -62,4 +62,11 @@ DATABASE_URL=your_database_url
 GROQ_API_KEY=your_groq_api_key
 ```
 
+## Screenshots
+<img width="1919" height="1076" alt="Screenshot From 2026-07-31 19-32-54" src="https://github.com/user-attachments/assets/25565a49-b2de-4954-879c-38eb8d28c428" />
+
+<img width="1919" height="1076" alt="Screenshot From 2026-07-31 19-33-03" src="https://github.com/user-attachments/assets/5180bfce-eb0e-4da8-846d-c77357489d35" />
+
+<img width="1919" height="1076" alt="Screenshot From 2026-07-31 19-33-10" src="https://github.com/user-attachments/assets/a81066a2-8ad4-4085-a7d1-5a354d946c80" />
+
 
