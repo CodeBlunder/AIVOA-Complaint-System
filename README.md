@@ -77,7 +77,6 @@ Start the API:
 uvicorn app.main:app --reload
 ```
 
-API documentation: http://localhost:8000/docs
 
 ### 3. Start the frontend
 
