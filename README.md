@@ -107,8 +107,3 @@ Open http://localhost:3000.
     qualified person before being used in real compliance decisions.
 -   OCR results depend on document quality and image clarity.
 -   Keep API keys in `.env` and never commit secrets to Git.
-
-## Author
-
-Built by **\[Your Name\]** for the AIVOA AI Product Engineer (Intern)
-assignment.
