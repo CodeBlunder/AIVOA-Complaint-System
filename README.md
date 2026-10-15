@@ -19,25 +19,15 @@ extraction, and risk assessment.
     complaints.
 
 ## Screenshots
+Home Page
+<img width="1916" height="1043" alt="Screenshot From 2026-10-15 15-31-06" src="https://github.com/user-attachments/assets/48e33db4-f70d-46da-8cb4-15a0f1f4af93" />
 
-Add your four application screenshots to a `screenshots/` folder in the
-repository and use these filenames (or update the paths below):
+Complaint Form
+<img width="1919" height="1076" alt="Screenshot From 2026-07-31 19-33-10" src="https://github.com/user-attachments/assets/93ba97fe-7add-462c-a505-d35032d5c301" />
 
-  ---------------------------------------------------------------------------------
-  Dashboard                                 Complaint form
-  ----------------------------------------- ---------------------------------------
-  ![Dashboard](screenshots/dashboard.png)   ![Complaint
-                                            form](screenshots/complaint-form.png)
+Dashboard
+<img width="1919" height="1076" alt="Screenshot From 2026-07-31 19-32-54" src="https://github.com/user-attachments/assets/5cb68a65-97c4-4f10-a5c4-a736f930f9d0" />
 
-  ---------------------------------------------------------------------------------
-
-  ----------------------------------------------------------------------------------
-  AI tools                            Risk assessment
-  ----------------------------------- ----------------------------------------------
-  ![AI                                ![Risk
-  tools](screenshots/ai-tools.png)    assessment](screenshots/risk-assessment.png)
-
-  ----------------------------------------------------------------------------------
 
 ## Tech Stack
 
