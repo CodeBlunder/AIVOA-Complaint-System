@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -10,24 +11,20 @@ import {
   Clock, TrendingUp, FilePlus, ArrowRight
 } from 'lucide-react';
 
-/**
- * Dashboard page – shows KPI cards and a recent complaints preview.
- */
 export default function Dashboard() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { items, loading } = useSelector(s => s.complaints);
+  const dispatch  = useDispatch();
+  const navigate  = useNavigate();
+  const { items, loading, error } = useSelector(s => s.complaints);
 
   useEffect(() => {
     dispatch(fetchComplaints());
   }, [dispatch]);
 
-  // Compute KPIs
-  const total      = items.length;
-  const open       = items.filter(c => c.status === 'Open').length;
-  const critical   = items.filter(c => c.severity === 'Critical').length;
-  const closed     = items.filter(c => c.status === 'Closed').length;
-  const regReport  = items.filter(c => c.regulatory_reportable).length;
+  const total     = items.length;
+  const open      = items.filter(c => c.status === 'Open').length;
+  const critical  = items.filter(c => c.severity === 'Critical').length;
+  const closed    = items.filter(c => c.status === 'Closed').length;
+  const regReport = items.filter(c => c.regulatory_reportable).length;
 
   const recent = [...items]
     .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
@@ -47,6 +44,24 @@ export default function Dashboard() {
     green:  'bg-green-50 text-green-600',
   };
 
+  // Show error as string — never render error object directly
+  if (error) {
+    return (
+      <div className="bg-red-50 border border-red-200 rounded-xl p-5 text-red-700 text-sm">
+        <p className="font-semibold mb-1">Failed to load complaints</p>
+        <p className="text-red-500">
+          {typeof error === 'string' ? error : JSON.stringify(error)}
+        </p>
+        <button
+          onClick={() => dispatch(fetchComplaints())}
+          className="mt-3 text-xs font-medium text-red-700 underline"
+        >
+          Retry
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6">
       {/* KPI Grid */}
@@ -59,12 +74,14 @@ export default function Dashboard() {
                 <Icon size={15} />
               </div>
             </div>
-            <p className="text-3xl font-bold text-slate-900">{loading ? '—' : value}</p>
+            <p className="text-3xl font-bold text-slate-900">
+              {loading ? '—' : value}
+            </p>
           </div>
         ))}
       </div>
 
-      {/* Regulatory reportable alert */}
+      {/* Regulatory alert */}
       {regReport > 0 && (
         <div className="bg-red-50 border border-red-200 rounded-xl px-5 py-3 flex items-center gap-3">
           <AlertTriangle size={18} className="text-red-600 shrink-0" />
@@ -72,7 +89,9 @@ export default function Dashboard() {
             <p className="text-sm font-semibold text-red-700">
               {regReport} complaint{regReport > 1 ? 's' : ''} require regulatory reporting
             </p>
-            <p className="text-xs text-red-500">Review and submit to FDA/EMA as required by 21 CFR Part 211.198</p>
+            <p className="text-xs text-red-500">
+              Review and submit to FDA/EMA as required by 21 CFR Part 211.198
+            </p>
           </div>
           <button
             onClick={() => navigate('/complaints')}
@@ -83,7 +102,7 @@ export default function Dashboard() {
         </div>
       )}
 
-      {/* Recent complaints table */}
+      {/* Recent complaints */}
       <div className="bg-white border border-slate-200 rounded-xl overflow-hidden">
         <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100">
           <h2 className="text-sm font-semibold text-slate-900 flex items-center gap-2">
@@ -132,12 +151,24 @@ export default function Dashboard() {
                   onClick={() => navigate(`/complaints/${c.id}`)}
                   className="hover:bg-slate-50 cursor-pointer transition-colors"
                 >
-                  <td className="px-5 py-3 font-mono text-xs text-slate-400">{c.complaint_number}</td>
-                  <td className="px-5 py-3 font-medium text-slate-800">{truncate(c.product_name, 30)}</td>
-                  <td className="px-5 py-3 text-slate-500">{c.complainant_name || '—'}</td>
-                  <td className="px-5 py-3"><Badge type="severity" value={c.severity} /></td>
-                  <td className="px-5 py-3"><Badge type="status" value={c.status} /></td>
-                  <td className="px-5 py-3 text-slate-400 text-xs">{formatDate(c.created_at)}</td>
+                  <td className="px-5 py-3 font-mono text-xs text-slate-400">
+                    {c.complaint_number}
+                  </td>
+                  <td className="px-5 py-3 font-medium text-slate-800">
+                    {truncate(c.product_name, 30)}
+                  </td>
+                  <td className="px-5 py-3 text-slate-500">
+                    {c.complainant_name || '—'}
+                  </td>
+                  <td className="px-5 py-3">
+                    <Badge type="severity" value={c.severity} />
+                  </td>
+                  <td className="px-5 py-3">
+                    <Badge type="status" value={c.status} />
+                  </td>
+                  <td className="px-5 py-3 text-slate-400 text-xs">
+                    {formatDate(c.created_at)}
+                  </td>
                   <td className="px-5 py-3">
                     <ArrowRight size={14} className="text-slate-300" />
                   </td>

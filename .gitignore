@@ -1,13 +1,26 @@
-# Environment
+
+# ── Environment files (never commit real keys) ──
 .env
 .env.*
 !.env.example
 
-# Python
+# ── Python ──
 __pycache__/
 *.pyc
+*.pyo
 
-# Virtual environment
+# ── Virtual environments ──
 pgaivoa/
 venv/
 .venv/
+
+# ── Node ──
+node_modules/
+build/
+
+# ── Logs ──
+*.log
+
+# ── OS files ──
+.DS_Store
+Thumbs.db

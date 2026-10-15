@@ -1,11 +1,35 @@
+
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import api from '../../services/api';
+
+// ── Date sanitizer ───────────────────────────────────────────────────────────
+// LLMs sometimes return dates as "Mar 2026" or "15-03-2026"
+// HTML date inputs require strictly "yyyy-MM-dd"
+function sanitizeDates(formData) {
+  if (!formData) return formData;
+  const dateFields = ['manufacturing_date', 'expiry_date', 'date_received'];
+  const cleaned = { ...formData };
+  dateFields.forEach(field => {
+    if (cleaned[field]) {
+      const val = cleaned[field];
+      // Already correct format — leave it alone
+      if (/^\d{4}-\d{2}-\d{2}$/.test(val)) return;
+      // Try to parse and reformat
+      const parsed = new Date(val);
+      cleaned[field] = !isNaN(parsed.getTime())
+        ? parsed.toISOString().split('T')[0]
+        : '';  // Can't parse — clear it
+    }
+  });
+  return cleaned;
+}
+
+// ── Async Thunks ─────────────────────────────────────────────────────────────
 
 export const runLogAgent = createAsyncThunk(
   'ai/logComplaint',
   async (prompt, { rejectWithValue }) => {
     try {
-      // POST with JSON body — NOT query param — avoids URL length/encoding issues
       const response = await api.post('/ai/log-complaint', { prompt });
       return response.data;
     } catch (err) {
@@ -44,6 +68,8 @@ export const runExtractAgent = createAsyncThunk(
   }
 );
 
+// ── Slice ─────────────────────────────────────────────────────────────────────
+
 const aiSlice = createSlice({
   name: 'ai',
   initialState: {
@@ -61,13 +87,22 @@ const aiSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    const handlePending   = (state)         => { state.loading = true; state.error = null; };
+    const handlePending = (state) => {
+      state.loading = true;
+      state.error = null;
+    };
+
     const handleFulfilled = (state, action) => {
       state.loading = false;
+      // Sanitize dates before storing — prevents HTML date input errors
+      if (action.payload.form_data) {
+        action.payload.form_data = sanitizeDates(action.payload.form_data);
+      }
       state.riskAssessment = action.payload.risk_assessment || null;
       state.processingNotes = action.payload.processing_notes || [];
     };
-    const handleRejected  = (state, action) => {
+
+    const handleRejected = (state, action) => {
       state.loading = false;
       state.error = action.payload || action.error.message;
     };

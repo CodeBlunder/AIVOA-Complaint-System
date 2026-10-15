@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { runLogAgent, runEditAgent } from '../../store/slices/aiSlice';
@@ -6,7 +7,7 @@ import { Wand2, Loader2 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 const EXAMPLES = [
-  "ABC Pharma called about batch B2024-3312 of Metformin 500mg tablets showing discolouration. Contact: john@abcpharma.com. Expiry: Mar 2026.",
+  "ABC Pharma called about batch B2024-3312 of Metformin 500mg tablets showing discolouration. Contact: john@abcpharma.com. Expiry: 2026-03-01.",
   "City Hospital reports Amoxicillin 250mg capsules lot MFG-2024-112 appear underfilled. 200 units affected.",
   "Dr. Patel reports contamination in injectable batch INJ-2024-887 of Cefixime. Visible particles. Critical safety concern."
 ];
@@ -29,11 +30,18 @@ export default function AICopilot({ mode = 'log', currentData = null }) {
           currentData,
         })).unwrap();
       }
-      if (result.form_data) {
+
+      console.log('AI RESULT:', JSON.stringify(result, null, 2));
+
+      if (result.form_data && Object.keys(result.form_data).length > 0) {
         dispatch(setFormData(result.form_data));
         toast.success('Form filled by AI. Please review and save.');
+      } else {
+        console.warn('form_data is empty:', result);
+        toast.error('AI returned empty data. Check terminal logs.');
       }
     } catch (err) {
+      console.error('AI ERROR:', err);
       toast.error('AI processing failed. Try again.');
     }
   };
